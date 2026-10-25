@@ -1,0 +1,276 @@
+:root {
+    --bg-main: #141414;
+    --bg-card: #202020;
+    --bg-input: #282828;
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    --gradient-element: linear-gradient(135deg, #333333 0%, #1c1c1c 100%);
+    --gradient-btn: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #0b0b0b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+/* Оболочка телефона */
+.phone-wrapper {
+    width: 100%;
+    max-width: 380px;
+    height: 780px;
+    background-color: var(--bg-main);
+    border-radius: 40px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 4px solid #1f1f1f;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.logo {
+    color: var(--text-main);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    font-weight: 300;
+    color: #888888;
+}
+
+/* Блок поиска сверху */
+.search-section {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.search-box {
+    display: flex;
+    gap: 8px;
+}
+
+.search-box input {
+    flex: 1;
+    background: var(--bg-input);
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-box button {
+    background: var(--gradient-btn);
+    border: none;
+    padding: 0 16px;
+    border-radius: 15px;
+    font-weight: 600;
+    color: #141414;
+    cursor: pointer;
+}
+
+/* Список треков выпадает под поиском */
+.track-list {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #1c1c1c;
+    border-radius: 15px;
+    margin-top: 5px;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+}
+
+.track-list.visible {
+    display: flex;
+}
+
+.track-card {
+    display: flex;
+    align-items: center;
+    background: var(--bg-card);
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.track-card img {
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.track-info { flex: 1; overflow: hidden; }
+.track-title { font-weight: 600; color: #fff; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track-artist { color: var(--text-muted); font-size: 11px; }
+
+/* Главный экран плеера */
+.main-player {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vinyl-container {
+    width: 240px;
+    height: 240px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.vinyl-disk {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.vinyl-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Вращение */
+.vinyl-container.playing .vinyl-disk {
+    animation: rotateVinyl 20s linear infinite;
+}
+
+@keyframes rotateVinyl {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Круглая кнопка Play по центру */
+.center-play-btn {
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--gradient-btn);
+    border: none;
+    box-shadow: 0 8px 20px rgba(255,255,255,0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.play-icon {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 16px solid #141414;
+    margin-left: 4px;
+}
+
+.play-icon.pause {
+    width: 14px;
+    height: 16px;
+    border: none;
+    border-left: 4px solid #141414;
+    border-right: 4px solid #141414;
+    margin-left: 0;
+}
+
+/* Плашки информации о треке из вашего дизайна */
+.track-meta {
+    width: 100%;
+    text-align: center;
+}
+
+.track-meta h2 {
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--gradient-element);
+    padding: 14px;
+    border-radius: 20px;
+    color: #fff;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.05);
+}
+
+.track-meta p {
+    font-size: 13px;
+    background: var(--gradient-element);
+    padding: 10px;
+    border-radius: 16px;
+    color: #888;
+    margin-top: 10px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Нижние кнопки */
+.bottom-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+}
+
+.nav-btn {
+    flex: 1;
+    height: 44px;
+    border-radius: 18px;
+    border: none;
+    background: var(--gradient-element);
+    color: #666;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn.active {
+    background: var(--gradient-btn);
+    color: #141414;
+}
